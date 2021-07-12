@@ -24,3 +24,35 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+address = input("Введите IP-адрес сети: ")
+address = address.split("/")
+network = address[0].split(".")
+mask = int(address[1])
+
+output_network = '''
+Network:
+{0:<8} {1:<8} {2:<8} {3:<8}
+{0:08b} {1:08b} {2:08b} {3:08b}
+'''
+output_mask = '''
+Mask:
+/{0}
+{1:<8} {2:<8} {3:<8} {4:<8}
+{1:08b} {2:08b} {3:08b} {4:08b}
+'''
+
+octs = [
+    int(network[0]),
+    int(network[1]),
+    int(network[2]),
+    int(network[3])
+]
+bin_mask = "1"*mask + "0"*(32-mask)
+m = [
+    int(bin_mask[0:8],2),
+    int(bin_mask[8:16],2),
+    int(bin_mask[16:24],2),
+    int(bin_mask[24:32],2)
+]
+print(output_network.format(octs[0], octs[1],octs[2],octs[3]))
+print(output_mask.format(mask,m[0],m[1],m[2],m[3]))
