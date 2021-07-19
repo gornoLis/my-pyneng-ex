@@ -15,5 +15,13 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+from sys import argv
 
 ignore = ["duplex", "alias", "configuration"]
+
+with open(argv[1]) as f1, open(argv[2], "w") as f2:
+    for line in f1:
+        words = line.split()
+        words_intersect = set(words) & set (ignore)
+        if not line.startswith("!") and not words_intersect:
+            f2.write(line)

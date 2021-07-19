@@ -15,5 +15,19 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+from sys import argv
 
 ignore = ["duplex", "alias", "configuration"]
+
+check = True
+with open(argv[1]) as f:
+    for line in f:
+        check = True
+        if line.startswith("!"):
+            continue 
+        for item in ignore:
+            if line.find(item) !=-1:
+                check = False
+                break
+        if check:
+            print(line.rstrip())
