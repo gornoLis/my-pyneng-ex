@@ -23,3 +23,16 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+def get_int_vlan_map(config_filename):
+    access_ports = {}
+    trunk_ports = {}
+    with open(config_filename) as f:
+        for line in f:
+            if not line.startswith("!"):
+                if "interface" in line:
+                    intf = line.split()[-1]
+                elif "access vlan" in line:
+                    access_ports[intf] = int(line.split()[-1])
+                elif "trunk allowed vlan" in line:
+                    trunk_ports[intf] = [int(n) for n in line.split()[-1].split(",")]
+    return access_ports,trunk_ports
