@@ -26,7 +26,7 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
-
+from pprint import pprint
 headers = ["hostname", "ios", "platform"]
 
 data = [
@@ -34,3 +34,9 @@ data = [
     ("R2", "15.2(2)T1", "Cisco 2911"),
     ("SW1", "12.2(55)SE9", "Cisco WS-C2960-8TC-L"),
 ]
+def convert_to_dict(keys,values):
+    result = [dict(zip(keys,i)) for i in values]    
+    return result
+
+if __name__=="__main__":
+    pprint(convert_to_dict(headers,data))
